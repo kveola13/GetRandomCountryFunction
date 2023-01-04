@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace TestFunctionApp
 {
-    public static class Function1
+    public static class GetRandomCountry
     {
         private const string noRandomCountry = "This HTTP triggered function executed successfully. " +
             "Pass the value 'Random' in the query string or in the request body to get a random country.";
