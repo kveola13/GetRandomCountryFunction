@@ -227,16 +227,16 @@ namespace TestFunctionApp
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             dynamic data = JsonConvert.DeserializeObject(requestBody);
             random ??= data?.random;
+            string randomCountry = $"You've opted out of selecting a random country, pass the value 'Random' as true to get one next time.";
 
+            if (random == null) return new OkObjectResult(randomCountry);
             if (random.ToLower().Equals("true")){
                 Random randomNumber = new();
                 int getRandomNumber = randomNumber.Next(0, countries.Length);
                 return new OkObjectResult("You've selected a random country, it is: " + countries[getRandomNumber]);
             }
-            string randomCountry = $"You've opted out of selecting a random country, pass the value 'Random' as true to get one next time.";
-            string responseMessage = string.IsNullOrEmpty(random) ? noRandomCountry : randomCountry;
 
-            return new OkObjectResult(responseMessage);
+            return new OkObjectResult(noRandomCountry);
         }
     }
 }
